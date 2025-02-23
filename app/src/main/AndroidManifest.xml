@@ -13,6 +13,26 @@
         android:theme="@style/Theme.YoloImageLabeler"
         tools:targetApi="31">
         <activity
+            android:name=".ImageLabelingActivity"
+            android:exported="false"
+            android:label="@string/title_activity_image_labeling"
+            android:theme="@style/Theme.YoloImageLabeler" />
+        <activity
+            android:name=".ui.theme.ImageLabelingActivity"
+            android:exported="false"
+            android:label="@string/title_activity_image_labeling"
+            android:theme="@style/Theme.YoloImageLabeler" />
+        <activity
+            android:name=".FolderSelectionActivity"
+            android:exported="false"
+            android:label="@string/title_activity_folder_selection"
+            android:theme="@style/Theme.YoloImageLabeler" />
+        <activity
+            android:name=".Activities.FolderSelectionActivity"
+            android:exported="false"
+            android:label="@string/title_activity_folder_selection"
+            android:theme="@style/Theme.YoloImageLabeler" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
