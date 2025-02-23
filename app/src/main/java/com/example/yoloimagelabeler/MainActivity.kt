@@ -7,6 +7,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.DocumentsContract
+import android.provider.DocumentsProvider
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.provider.DocumentsContractCompat
 import com.example.yoloimagelabeler.ui.theme.YoloImageLabelerTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +48,11 @@ class MainActivity : ComponentActivity() {
             if (result.resultCode == RESULT_OK) {
                 val uri: Uri? = result.data?.data
                 uri?.let {
-                    listFilesInFolder(it)
+                    contentResolver.takePersistableUriPermission(
+                        it.normalizeScheme(),
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                    listFilesInFolder(it.normalizeScheme())
                 }
             } else {
                 Toast.makeText(this, "Folder selection failed", Toast.LENGTH_SHORT).show()
@@ -55,18 +62,21 @@ class MainActivity : ComponentActivity() {
 
     @SuppressLint("Range")
     private fun listFilesInFolder(uri: Uri) {
+        var documentId = DocumentsContract.getTreeDocumentId(uri)
+
+        val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(uri, documentId)
+
         val resolver: ContentResolver = contentResolver
-
-        val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(uri, DocumentsContract.Document.COLUMN_DISPLAY_NAME)
-
         val cursor = resolver.query(childrenUri, null, null, null, null)
         cursor?.use {
             while (it.moveToNext()) {
-                val displayName = it.getString(it.getColumnIndex(DocumentsContract.Document.COLUMN_DISPLAY_NAME))
-                val mimeType = it.getString(it.getColumnIndex(DocumentsContract.Document.COLUMN_MIME_TYPE))
+                val displayName =
+                    it.getString(it.getColumnIndex(DocumentsContract.Document.COLUMN_DISPLAY_NAME))
+                val mimeType =
+                    it.getString(it.getColumnIndex(DocumentsContract.Document.COLUMN_MIME_TYPE))
 
-                if (mimeType.startsWith("image/") || mimeType == "text/plain") {
-                    println("Found File: $displayName, $mimeType")
+                if (mimeType.startsWith("image/") || mimeType.startsWith("text/plain")) {
+                    Log.i("n.nair", "Found File: $displayName, $mimeType")
                 }
             }
         }
