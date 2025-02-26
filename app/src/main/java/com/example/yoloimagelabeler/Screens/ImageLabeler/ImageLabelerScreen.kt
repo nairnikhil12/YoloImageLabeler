@@ -10,7 +10,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -25,10 +29,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.yoloimagelabeler.Screens.ImageLabeler.Components.ChangeImageButton
 import com.example.yoloimagelabeler.Screens.ImageLabeler.Components.DisplayCurrentImageIndex
 import com.example.yoloimagelabeler.Screens.ImageLabeler.Components.DisplayImage
 import com.example.yoloimagelabeler.Screens.ImageLabeler.Components.LabelDropDown
+import com.example.yoloimagelabeler.Screens.ImageLabeler.Components.ToolbarFunction
 import com.example.yoloimagelabeler.data.LocalFolderConfig
 import com.example.yoloimagelabeler.util.generateFilenameFromImageId
 import com.example.yoloimagelabeler.util.getRectanglesFromFile
@@ -80,7 +84,7 @@ fun ImageLabelerScreen() {
             DisplayCurrentImageIndex(currentImageIdx)
 
             // Go to previous image
-            ChangeImageButton(Icons.AutoMirrored.Filled.ArrowForward) {
+            ToolbarFunction(Icons.AutoMirrored.Filled.ArrowBack) {
                 val numOfImages = folderConfig.imageData.size
 
                 // If index goes below 0, go to the last image
@@ -89,7 +93,7 @@ fun ImageLabelerScreen() {
             }
 
             // Go to next image
-            ChangeImageButton(Icons.AutoMirrored.Filled.ArrowForward) {
+            ToolbarFunction(Icons.AutoMirrored.Filled.ArrowForward) {
                 val numOfImages = folderConfig.imageData.size
 
                 // If index beyond the last image, loop back to the first image
@@ -116,6 +120,13 @@ fun ImageLabelerScreen() {
                 rectangles.clear()
             }, colors= ButtonDefaults.buttonColors(Color.Red)) {
                 Text("Reset", color= Color.White)
+            }
+
+            // Remove the last added box
+            ToolbarFunction(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft) {
+                if (rectangles.size > 0) {
+                    rectangles.removeAt(rectangles.size - 1)
+                }
             }
         }
 
