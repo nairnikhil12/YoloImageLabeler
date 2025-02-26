@@ -1,6 +1,5 @@
 package com.example.yoloimagelabeler
 
-import ImageLabelerScreen
 import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Intent
@@ -27,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.yoloimagelabeler.Screens.ImageLabeler.ImageLabelerScreen
 import com.example.yoloimagelabeler.data.FolderConfig
 import com.example.yoloimagelabeler.data.ImageData
 import com.example.yoloimagelabeler.data.LabelData
