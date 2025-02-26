@@ -111,7 +111,7 @@ fun ImageLabelerScreen() {
                 )
 
                 Toast.makeText(context, "Label Saved", Toast.LENGTH_SHORT).show()
-            }, colors=ButtonDefaults.buttonColors(Color.Green)) {
+            }, colors=ButtonDefaults.buttonColors(Color(0x4c, 0xaf, 0x50))) {
                 Text("Save", color= Color.White)
             }
 
