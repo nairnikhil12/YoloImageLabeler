@@ -9,4 +9,4 @@ Usage
 - Click on Save and go to the next image.
 - If you want to remove a label, you can click on Reset or Undo.
 
-![Usage](usage/Usage.gif)
+<img src="usage/Usage.gif" width="20%" height="20%" />
