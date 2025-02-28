@@ -89,21 +89,21 @@ fun DisplayImage(documentId: String, rectangles: SnapshotStateList<Pair<Int, Rec
                         imageBottomRight =
                             imageTopLeft + Offset(xOffset + actualWidth, yOffset + actualHeight)
 
-                        // Draw red dots at the calculated positions
-                        drawCircle(
-                            color = Color.Red,
-                            radius = 5.dp.toPx(),
-                            center = Offset(xOffset, yOffset) // Image Top-Left
-                        )
-
-                        drawCircle(
-                            color = Color.Red,
-                            radius = 5.dp.toPx(),
-                            center = Offset(
-                                xOffset + actualWidth,
-                                yOffset + actualHeight
-                            ) // Image Bottom-Right
-                        )
+//                        // Draw red dots at the calculated positions
+//                        drawCircle(
+//                            color = Color.Red,
+//                            radius = 5.dp.toPx(),
+//                            center = Offset(xOffset, yOffset) // Image Top-Left
+//                        )
+//
+//                        drawCircle(
+//                            color = Color.Red,
+//                            radius = 5.dp.toPx(),
+//                            center = Offset(
+//                                xOffset + actualWidth,
+//                                yOffset + actualHeight
+//                            ) // Image Bottom-Right
+//                        )
 
                         imageTopLeft = Offset(xOffset, yOffset)
                         imageBottomRight = Offset(xOffset + actualWidth, yOffset + actualHeight)
